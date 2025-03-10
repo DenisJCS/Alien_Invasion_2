@@ -13,6 +13,14 @@ class Ship():
         # Start each new ship at the bottom of the screen
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # Flag of moving
+        self.moving_right = False
+
+    def update(self):
+        """Update ship's position from flag"""
+        if self.moving_right:
+            self.rect.x += 1
+
     def blitme(self):
         """Draw ship in present postition"""
         self.screen.blit(self.image, self.rect)
