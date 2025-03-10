@@ -23,11 +23,24 @@ class AlienInvasion:
     def run_game(self):
         """Run main cicle of game"""
         while True:
-            # Tracking events of mouse and keyboard
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            
+            self.check_event()
+            self.ship.update()
+            self.update_screen()
+        # Redraw screen in every cicle
+
+    def _check_events(self):
+        """Respond to keypress and mouse events"""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
+    
+    def _update_screen(self):
             #Every past cicle will draw it 
             self.screen.fill(self.settings.bg_color)
             self.ship.blitme()
